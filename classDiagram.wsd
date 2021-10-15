@@ -1,0 +1,14 @@
+@startuml classDiagram
+    class TFApp{}
+
+    class PlayerNameSearch{}
+    class TagSearch{}
+    class Top10Search{}
+    class UserRatesSearch{}
+
+    TFApp --> PlayerNameSearch:uses
+    TFApp --> TagSearch:uses
+    TFApp --> Top10Search:uses
+    TFApp --> UserRatesSearch:uses
+    
+@enduml

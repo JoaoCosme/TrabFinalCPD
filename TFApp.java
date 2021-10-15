@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import javax.sql.RowSetInternal;
 
-class main {
+class TFApp {
     public static void main(String[] args) {
         var commandScanner = new Scanner(System.in);
 
@@ -12,8 +12,9 @@ class main {
         var top10Search = new Top10Search();
         var tagsSearch  = new TagSearch();
 
+        boolean programRunning = true;
 
-        while (true) {
+        while (programRunning) {
             System.out.print("Enter command: ");
 
             var commandInput = commandScanner.nextLine();
@@ -37,8 +38,9 @@ class main {
                     break;
 
                 case "q":
+                    programRunning = false;
                     commandScanner.close();
-                    return;
+                    break;
             
                 default:
                     System.out.println("Comando invalido");
