@@ -1,14 +1,52 @@
 @startuml classDiagram
-    class TFApp{}
+    hide empty members
 
-    class PlayerNameSearch{}
-    class TagSearch{}
-    class Top10Search{}
-    class UserRatesSearch{}
+    class TFApp{
+        -SearchOrchestrator orchestrator
+    }
+    class WebTFApp{
+        -SearchOrchestrator orchestrator
+    }
 
-    TFApp --> PlayerNameSearch:uses
-    TFApp --> TagSearch:uses
-    TFApp --> Top10Search:uses
-    TFApp --> UserRatesSearch:uses
+    class SearchOrchestratorAssembler<<Static>>{
+        +Create():SearchOrchestrator
+    }
+    class DBEtnries<<Singleton>>{
+        - HashTable<Jogador> jogadores
+        - HashTable<User> users
+    }
+    class SearchOrchestrator{
+        +run()
+    }
+
+    class PesquisaJogadores{
+        - ArvoreTrie nameSearch
+        + constructor(args[])
+        + GetPlayersData(String prefixo)
+    }
+
+    Class ArvoreTrie{
+
+    }
+
+    class PesquisaAvaliacaoUsers{
+        + GetUserReviews(int userCode)
+    }
+    class PesuisaTags{
+        + GetPlayersWTags(String[] tags)
+    }
+    class PesquisaTopN{
+        + GetTop(int topN, String posicao)
+    }
+    
+    SearchOrchestratorAssembler --> SearchOrchestrator:builds
+    WebTFApp --> SearchOrchestratorAssembler:calls
+    TFApp --> SearchOrchestratorAssembler:calls
+    SearchOrchestratorAssembler --> DBEtnries: initializes
+    SearchOrchestrator --> PesquisaJogadores:has
+    SearchOrchestrator --> PesuisaTags:has
+    SearchOrchestrator --> PesquisaTopN:has
+    SearchOrchestrator --> PesquisaAvaliacaoUsers:has
+    PesquisaJogadores --> ArvoreTrie: has
     
 @enduml

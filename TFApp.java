@@ -6,6 +6,8 @@ class TFApp {
     public static void main(String[] args) {
         var commandScanner = new Scanner(System.in);
 
+        //Proximo passo: Consumir csvs
+
         // Rotina de inicialização
         var playerNameSearch = new PlayerNameSearch();
         var userRatesSearch  = new UsersRatesSearch();
