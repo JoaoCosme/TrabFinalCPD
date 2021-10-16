@@ -15,6 +15,26 @@
         - HashTable<Jogador> jogadores
         - HashTable<User> users
     }
+
+    class Jogador{
+        - int sofifaID
+        - String shortName
+        - List<String> playerPositions
+        - double globalRating
+        - int count
+        - List<String> tags
+    }
+
+    class UserClassJogador{
+        - int sofifaID
+        - int rating
+    }
+
+    class User{
+        - int id
+        - List<UserClassJogador> jogadoresClassificados
+    }
+
     class SearchOrchestrator{
         +run()
     }
@@ -48,5 +68,8 @@
     SearchOrchestrator --> PesquisaTopN:has
     SearchOrchestrator --> PesquisaAvaliacaoUsers:has
     PesquisaJogadores --> ArvoreTrie: has
+    DBEtnries --> Jogador
+    DBEtnries --> User
+    User --> UserClassJogador
     
 @enduml
