@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class SearchOrchestratorAssembler{
     public static SearchOrchestrator create() {
         Instant now = Instant.now();
+
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
         Scanner ratingInfo = utils.create_scanner("dados/rating.csv");
         Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
@@ -33,6 +34,7 @@ public class SearchOrchestratorAssembler{
         // Jogador:Count
 
         //Passar por headers
+        //Talvez ler eles para saber o index de cada coisa? QOL
         jogadorInfo.nextLine();
         ratingInfo.nextLine();
         tagsInfo.nextLine();
@@ -93,7 +95,9 @@ public class SearchOrchestratorAssembler{
         ratingInfo.close();
         tagsInfo.close();
 
-        System.out.println(Duration.between(now,Instant.now()).toSecondsPart());
+        System.out.println(
+                "Tempo total ="+Duration.between(now,Instant.now()).toSecondsPart()
+        );
 
         return returnSearchOrchestrator;
     }

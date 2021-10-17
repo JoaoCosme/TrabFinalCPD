@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class User {
+public class User{
     private int id;
     private List<UserClassJogador> jogadoresClassificados;
 
@@ -34,5 +34,15 @@ public class User {
             " id='" + getId() + "'" +
             ", jogadoresClassificados='" + getJogadoresClassificados().toString() + "'" +
             "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return getId() == user.getId();
     }
 }

@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 //https://stackify.com/optional-parameters-java/
-public class Jogador {
+public class Jogador implements Comparable {
     private int sofifaId;
     private String shortName;
     private List<String> playerPositions;
@@ -92,5 +92,26 @@ public class Jogador {
 
     public void addTag(String tag){
         this.tags.add(tag);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Jogador jogador = (Jogador) o;
+
+        return sofifaId == jogador.sofifaId;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(this == o) return 0;
+        Jogador jogador = (Jogador) o;
+        if (jogador.getGlobalRating() < this.globalRating){
+            return 1;
+        }else{
+            return -1;
+        }
     }
 }
