@@ -1,12 +1,6 @@
-import api.PlayerNameSearch;
-import api.TagSearch;
-import api.Top10Search;
-import api.UsersRatesSearch;
 import service.SearchOrchestratorAssembler;
 
 import java.util.Scanner;
-
-import javax.sql.RowSetInternal;
 
 class TFApp {
     public static void main(String[] args) {

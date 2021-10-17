@@ -1,6 +1,7 @@
 package service;
 
-import api.searchOrchestrator;
+import api.*;
+import model.DBEntries;
 import model.Jogador;
 import model.User;
 import model.UserClassJogador;
@@ -8,16 +9,14 @@ import model.UserClassJogador;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class SearchOrchestratorAssembler{
-    public static searchOrchestrator create() {
+    public static SearchOrchestrator create() {
         Instant now = Instant.now();
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
-        Scanner ratingInfo = utils.create_scanner("dados/minirating.csv");
+        Scanner ratingInfo = utils.create_scanner("dados/rating.csv");
         Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
 
         if (jogadorInfo == null || ratingInfo == null || tagsInfo == null){
@@ -25,9 +24,13 @@ public class SearchOrchestratorAssembler{
             return null;
         }
 
-        var jogadoresHashTable = new JogadorHashTable(30000);
-        var userHashTable = new UserHashTable(300000);
+        final int hashSize = 200000;
+        var jogadoresHashTable = new JogadorHashTable(hashSize/2);
+        var userHashTable = new UserHashTable(hashSize);
         // Talvez tenha que criar hash para rating e count e tag
+        // TAG:List<Jogadores>
+        // Jogador:GLobalRating
+        // Jogador:Count
 
         //Passar por headers
         jogadorInfo.nextLine();
@@ -40,6 +43,7 @@ public class SearchOrchestratorAssembler{
             var sofifaId = Integer.parseInt(line[0]);
             var name = line[1];
             var jogador = new Jogador(sofifaId,name,listaDePosicoes);
+
             jogadoresHashTable.add(jogador);
         }
 
@@ -60,6 +64,7 @@ public class SearchOrchestratorAssembler{
             }else{
                 var listaClassificados = new ArrayList<UserClassJogador>();
                 listaClassificados.add(userClassJogador);
+
                 var newUser = new User(userId,listaClassificados);
                 userHashTable.add(newUser);
             }
@@ -73,13 +78,24 @@ public class SearchOrchestratorAssembler{
         }
 
 
-        System.out.println(jogadoresHashTable.getJogador(158023).toString());
-        System.out.println(Duration.between(now,Instant.now()).toSecondsPart());
+//        System.out.println(jogadoresHashTable.getJogador(158023).toString());
+
+        var dataBase = new DBEntries(jogadoresHashTable,userHashTable);
+
+        var playerNameSearch = new PlayerNameSearch();
+        var tagSearch  = new TagSearch();
+        var topNSearch = new TopNSearch();
+        var userRatesSearch = new UsersRatesSearch();
+
+        var returnSearchOrchestrator = new SearchOrchestrator(playerNameSearch,tagSearch,topNSearch,userRatesSearch);
 
         jogadorInfo.close();
         ratingInfo.close();
         tagsInfo.close();
-        return null;
+
+        System.out.println(Duration.between(now,Instant.now()).toSecondsPart());
+
+        return returnSearchOrchestrator;
     }
 
     private static List<String> getPosicoes(String[] linhaCsv){
