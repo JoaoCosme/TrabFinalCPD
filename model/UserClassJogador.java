@@ -24,4 +24,12 @@ public class UserClassJogador {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return "UserClassJogador{" +
+                "sofifaId=" + sofifaId +
+                ", rating=" + rating +
+                '}';
+    }
 }

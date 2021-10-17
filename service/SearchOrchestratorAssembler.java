@@ -38,27 +38,33 @@ public class SearchOrchestratorAssembler{
             jogadoresHashTable.add(jogador);
         }
 
-//        while (ratingInfo.hasNext()){
-//            var line = ratingInfo.nextLine().split(",");
-//            var jogador = jogadoresHashTable.getJogador(Integer.parseInt(line[1]));
-//            jogador.setCount(jogador.getCount()+1);
-//            jogador.setGlobalRating((jogador.getGlobalRating()+Double.parseDouble(line[2]))/jogador.getCount());
-//            var user = userHashTable.getUser(Integer.parseInt(line[0]));
-//            if(user!=null){
-//                var userClassJogador = new UserClassJogador(jogador.getSofifaId(),Double.parseDouble(line[2]));
-//                user.getJogadoresClassificados().add(userClassJogador);
-//            }else{
-//                var listaClassificados = new ArrayList<UserClassJogador>();
-//                listaClassificados.add(new UserClassJogador(jogador.getSofifaId(),Double.parseDouble(line[2])));
-//                var newUser = new User(Integer.parseInt(line[0]),listaClassificados);
-//                userHashTable.add(newUser);
-//            }
-//        }
+        while (ratingInfo.hasNext()){
+            var line = ratingInfo.nextLine().split(",");
+            var jogador = jogadoresHashTable.getJogador(Integer.parseInt(line[1]));
+            var notaUser = Double.parseDouble(line[2]);
+            var userId = Integer.parseInt(line[0]);
+
+            jogador.incCount();
+            jogador.addClassificao(notaUser);
+
+            var userClassJogador = new UserClassJogador(jogador.getSofifaId(),notaUser);
+
+            var user = userHashTable.getUser(userId);
+            if(user!=null){
+                user.getJogadoresClassificados().add(userClassJogador);
+            }else{
+                var listaClassificados = new ArrayList<UserClassJogador>();
+                listaClassificados.add(userClassJogador);
+                var newUser = new User(userId,listaClassificados);
+                userHashTable.add(newUser);
+            }
+        }
 
 
         System.out.println(jogadoresHashTable.getJogador(158023).toString());
-//        System.out.println(jogadoresHashTable.getJogador(158023).getShortName());
-
+        System.out.println(jogadoresHashTable.getJogador(201041).toString());
+        System.out.println(jogadoresHashTable.getJogador(223150).toString());
+        System.out.println(userHashTable.getUser(12389).toString());
 
         jogadorInfo.close();
         ratingInfo.close();

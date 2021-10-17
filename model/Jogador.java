@@ -8,6 +8,7 @@ public class Jogador {
     private String shortName;
     private List<String> playerPositions;
     private double globalRating;
+    private double totalGlobalRating;
     private int count;
     private List<String> tags;
 
@@ -78,5 +79,13 @@ public class Jogador {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public void addClassificao(double classificacao){
+        this.totalGlobalRating += classificacao;
+        this.globalRating = totalGlobalRating/count;
+    }
+    public void incCount(){
+        this.count++;
     }
 }
