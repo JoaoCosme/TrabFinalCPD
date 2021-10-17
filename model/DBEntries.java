@@ -1,3 +1,8 @@
+package model;
+
+import service.JogadorHashTable;
+import service.UserHashTable;
+
 public class DBEntries {
     private JogadorHashTable jogadores;
     private UserHashTable users;

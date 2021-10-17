@@ -1,3 +1,5 @@
+package model;
+
 public class UserClassJogador {
     private int sofifaId;
     private int rating;

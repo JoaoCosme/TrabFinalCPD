@@ -1,10 +1,14 @@
+package service;
+
+import model.Jogador;
+
 import java.util.*;
 
 public class JogadorHashTable extends hashTable {
     private ArrayList<Jogador> hashTable[];
 
 
-    public JogadorHashTable(ArrayList<Jogador> hashTabl[], int hashtablesize) {
+    public JogadorHashTable(int hashtablesize) {
         this.hashTable = new ArrayList[hashtablesize];
         this.hashtablesize = hashtablesize;
         
