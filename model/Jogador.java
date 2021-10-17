@@ -22,6 +22,10 @@ public class Jogador implements Comparable {
         this.tags = new ArrayList<String>();
     }
 
+    public Jogador(int sofifaId){
+        this.sofifaId = sofifaId;
+    }
+
     @Override
     public String toString() {
         return "{" +

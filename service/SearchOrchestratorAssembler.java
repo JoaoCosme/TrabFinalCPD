@@ -17,7 +17,7 @@ public class SearchOrchestratorAssembler{
         Instant now = Instant.now();
 
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
-        Scanner ratingInfo = utils.create_scanner("dados/rating.csv");
+        Scanner ratingInfo = utils.create_scanner("dados/minirating.csv");
         Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
 
         if (jogadorInfo == null || ratingInfo == null || tagsInfo == null){
@@ -80,7 +80,9 @@ public class SearchOrchestratorAssembler{
         }
 
 
-//        System.out.println(jogadoresHashTable.getJogador(158023).toString());
+        System.out.println(jogadoresHashTable.getJogador(158023).toString());
+        // Testar userHashTable
+        System.out.println(userHashTable.getUser(1000));
 
         var dataBase = new DBEntries(jogadoresHashTable,userHashTable);
 

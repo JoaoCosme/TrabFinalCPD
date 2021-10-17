@@ -12,6 +12,10 @@ public class User{
         this.jogadoresClassificados = jogadoresClassificados;
     }
 
+    public User(int id){
+        this.id = id;
+    }
+
     public int getId() {
         return this.id;
     }
