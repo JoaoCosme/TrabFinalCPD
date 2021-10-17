@@ -14,7 +14,7 @@ public class hashTable {
     }
 
     protected int hashValue(int valueToHash) {
-        var hashValue = (Math.pow(3,valueToHash)%hashtablesize);
+        var hashValue = (31*valueToHash%hashtablesize);
         return (int)hashValue;
     }
 

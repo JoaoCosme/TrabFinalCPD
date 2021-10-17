@@ -8,12 +8,12 @@ public class UserHashTable extends hashTable{
     private ArrayList<User> hashTable[];
 
 
-    public UserHashTable(ArrayList<User> hashTabl[], int hashtablesize) {
+    public UserHashTable(int hashtablesize) {
         this.hashTable = new ArrayList[hashtablesize];
         this.hashtablesize = hashtablesize;
-        
-        for (ArrayList<User> listaDehashTable : hashTable) {
-            listaDehashTable = new ArrayList<User>();
+
+        for (int i = 0; i < hashtablesize; i++) {
+            hashTable[i] = new ArrayList<User>();
         }
     }
 
@@ -36,16 +36,16 @@ public class UserHashTable extends hashTable{
         }
     }
 
-    public User getUser(int sofifaID){
-        int indexProcurado = hashValue(sofifaID);
+    public User getUser(int userId){
+        int indexProcurado = hashValue(userId);
         int indexSecundario = 0;
-        User UserBuscado = null;
+        User userBuscado = null;
         boolean isFound = false;
 
         if(!hashTable[indexProcurado].isEmpty()){
             while (!isFound) {
-                if(hashTable[indexProcurado].get(indexSecundario).getId() == sofifaID){
-                    UserBuscado = hashTable[indexProcurado].get(indexProcurado);
+                if(hashTable[indexProcurado].get(indexSecundario).getId() == userId){
+                    userBuscado = hashTable[indexProcurado].get(indexSecundario);
                     isFound = true;
                 }else{
                     indexSecundario++;
@@ -56,6 +56,6 @@ public class UserHashTable extends hashTable{
             }
         }
         
-        return UserBuscado;
+        return userBuscado;
     } 
 }

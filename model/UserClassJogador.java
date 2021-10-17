@@ -2,9 +2,9 @@ package model;
 
 public class UserClassJogador {
     private int sofifaId;
-    private int rating;
+    private double rating;
 
-    public UserClassJogador(int sofifaId, int rating) {
+    public UserClassJogador(int sofifaId, double rating) {
         this.sofifaId = sofifaId;
         this.rating = rating;
     }    
@@ -17,11 +17,11 @@ public class UserClassJogador {
         this.sofifaId = sofifaId;
     }
 
-    public int getRating() {
+    public double getRating() {
         return this.rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 }

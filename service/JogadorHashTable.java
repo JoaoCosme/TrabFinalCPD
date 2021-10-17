@@ -15,6 +15,9 @@ public class JogadorHashTable extends hashTable {
         for (ArrayList<Jogador> listaDehashTable : hashTable) {
             listaDehashTable = new ArrayList<Jogador>();
         }
+        for (int i = 0; i < hashtablesize; i++) {
+            hashTable[i] = new ArrayList<Jogador>();
+        }
     }
 
     public void add(Jogador jogador){
@@ -45,12 +48,12 @@ public class JogadorHashTable extends hashTable {
         if(!hashTable[indexProcurado].isEmpty()){
             while (!isFound) {
                 if(hashTable[indexProcurado].get(indexSecundario).getSofifaId() == sofifaID){
-                    jogadorBuscado = hashTable[indexProcurado].get(indexProcurado);
+                    jogadorBuscado = hashTable[indexProcurado].get(indexSecundario);
                     isFound = true;
                 }else{
                     indexSecundario++;
                     if (indexSecundario == hashTable[indexProcurado].size()) {
-                        break;
+                        return null;
                     }
                 }    
             }
