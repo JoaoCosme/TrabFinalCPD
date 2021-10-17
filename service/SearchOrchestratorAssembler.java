@@ -5,6 +5,8 @@ import model.Jogador;
 import model.User;
 import model.UserClassJogador;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,28 +15,31 @@ import java.util.stream.Collectors;
 
 public class SearchOrchestratorAssembler{
     public static searchOrchestrator create() {
+        Instant now = Instant.now();
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
         Scanner ratingInfo = utils.create_scanner("dados/minirating.csv");
-//        Scanner tagsInfo = utils.create_scanner("tags.csv");
+        Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
 
-        if (jogadorInfo == null || ratingInfo == null){ //|| ratingInfo == null || tagsInfo == null){
+        if (jogadorInfo == null || ratingInfo == null || tagsInfo == null){
             System.out.println("Erro ao abrir arquivos!");
             return null;
         }
 
         var jogadoresHashTable = new JogadorHashTable(30000);
         var userHashTable = new UserHashTable(300000);
+        // Talvez tenha que criar hash para rating e count e tag
 
         //Passar por headers
         jogadorInfo.nextLine();
         ratingInfo.nextLine();
+        tagsInfo.nextLine();
 
         while (jogadorInfo.hasNext()){
             var line = jogadorInfo.nextLine().replaceAll("\"","").split(",");
             var listaDePosicoes = getPosicoes(line);
             var sofifaId = Integer.parseInt(line[0]);
             var name = line[1];
-            var jogador = new Jogador(sofifaId,name,listaDePosicoes,0,0,null);
+            var jogador = new Jogador(sofifaId,name,listaDePosicoes);
             jogadoresHashTable.add(jogador);
         }
 
@@ -60,15 +65,20 @@ public class SearchOrchestratorAssembler{
             }
         }
 
+        while (tagsInfo.hasNext()){
+            var tagLine = tagsInfo.nextLine().split(",");
+            var jogador = jogadoresHashTable.getJogador(Integer.parseInt(tagLine[1]));
+            if(tagLine.length>2)
+                jogador.addTag(tagLine[2]);
+        }
+
 
         System.out.println(jogadoresHashTable.getJogador(158023).toString());
-        System.out.println(jogadoresHashTable.getJogador(201041).toString());
-        System.out.println(jogadoresHashTable.getJogador(223150).toString());
-        System.out.println(userHashTable.getUser(12389).toString());
+        System.out.println(Duration.between(now,Instant.now()).toSecondsPart());
 
         jogadorInfo.close();
         ratingInfo.close();
-//        tagsInfo.close();
+        tagsInfo.close();
         return null;
     }
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
 //https://stackify.com/optional-parameters-java/
 public class Jogador {
@@ -12,13 +13,13 @@ public class Jogador {
     private int count;
     private List<String> tags;
 
-    public Jogador(int sofifaId, String shortName, List<String> playerPositions, double globalRating, int count, List<String> tags) {
+    public Jogador(int sofifaId, String shortName, List<String> playerPositions) {
         this.sofifaId = sofifaId;
         this.shortName = shortName;
         this.playerPositions = playerPositions;
-        this.globalRating = globalRating;
-        this.count = count;
-        this.tags = tags;
+        this.globalRating = 0;
+        this.count = 0;
+        this.tags = new ArrayList<String>();
     }
 
     @Override
@@ -87,5 +88,9 @@ public class Jogador {
     }
     public void incCount(){
         this.count++;
+    }
+
+    public void addTag(String tag){
+        this.tags.add(tag);
     }
 }
