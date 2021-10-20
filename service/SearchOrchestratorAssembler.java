@@ -62,12 +62,9 @@ public class SearchOrchestratorAssembler{
 
             var user = userHashTable.getUser(userId);
             if(user!=null){
-                user.getJogadoresClassificados().add(userClassJogador);
+                user.addJogadoresClassificados(userClassJogador);
             }else{
-                var listaClassificados = new ArrayList<UserClassJogador>();
-                listaClassificados.add(userClassJogador);
-
-                var newUser = new User(userId,listaClassificados);
+                var newUser = new User(userId, List.of(userClassJogador));
                 userHashTable.add(newUser);
             }
         }
@@ -84,7 +81,7 @@ public class SearchOrchestratorAssembler{
         // Testar userHashTable
         System.out.println(userHashTable.getUser(1000));
 
-        var dataBase = new DBEntries(jogadoresHashTable,userHashTable);
+        var dbEntries = DBEntries.get_instance(jogadoresHashTable,userHashTable);
 
         var playerNameSearch = new PlayerNameSearch();
         var tagSearch  = new TagSearch();
@@ -100,6 +97,8 @@ public class SearchOrchestratorAssembler{
         System.out.println(
                 "Tempo total ="+Duration.between(now,Instant.now()).toSecondsPart()
         );
+
+        userRatesSearch.searchUser("4",DBEntries.get_instance());
 
         return returnSearchOrchestrator;
     }

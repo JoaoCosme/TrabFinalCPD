@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class User{
@@ -9,7 +11,7 @@ public class User{
 
     public User(int id, List<UserClassJogador> jogadoresClassificados) {
         this.id = id;
-        this.jogadoresClassificados = jogadoresClassificados;
+        this.jogadoresClassificados = new ArrayList<>(jogadoresClassificados);
     }
 
     public User(int id){
@@ -30,6 +32,11 @@ public class User{
 
     public void setJogadoresClassificados(List<UserClassJogador> jogadoresClassificados) {
         this.jogadoresClassificados = jogadoresClassificados;
+    }
+
+    public void addJogadoresClassificados(UserClassJogador novoJogadorClassificado){
+        this.jogadoresClassificados.add(novoJogadorClassificado);
+        jogadoresClassificados.sort(Comparator.comparing(UserClassJogador::getRating));
     }
 
     @Override
