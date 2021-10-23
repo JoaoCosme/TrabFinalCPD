@@ -1,16 +1,31 @@
 package api;
 
 import model.DBEntries;
+import model.User;
 
 public class UsersRatesSearch {
-    public void searchUser(String userCode, DBEntries dbEntries){
-        var userDB = dbEntries.get_instance().getUsers();
-        var playerDB = DBEntries.get_instance().getJogadores();
+    private DBEntries dbEntries;
 
-        var user = userDB.getUser(Integer.parseInt(userCode));
+    public UsersRatesSearch(final DBEntries dbEntries){
+        this.dbEntries = dbEntries;
+    }
+
+    public void searchUser(String userCode){
+        var userDB = dbEntries.getUsers();
+        var playerDB = dbEntries.getJogadores();
+
+        User user = userDB.getUser(Integer.parseInt(userCode));
+
+        if (user == null){
+            System.out.println("Usuario nao encontrado!");
+            return;
+        }
         var listaDeAvaliados = user.getJogadoresClassificados();
 
-        listaDeAvaliados.stream().forEach(
+        var usersShownCounter = new Object() {
+            int usersShown = 0;
+        };
+        listaDeAvaliados.forEach(
                 jogadorAvaliado -> {
                     var jogador = playerDB.getJogador(jogadorAvaliado.getSofifaId());
                     System.out.println(
@@ -20,6 +35,10 @@ public class UsersRatesSearch {
                             jogador.getCount() + "," +
                             jogadorAvaliado.getRating()
                     );
+                    usersShownCounter.usersShown +=1;
+                    if (usersShownCounter.usersShown >20){
+
+                    }
                 }
         );
 

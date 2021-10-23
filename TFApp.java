@@ -22,34 +22,11 @@ class TFApp {
             System.out.print("Enter command: ");
 
             var commandInput = commandScanner.nextLine();
-            var commands =  commandInput.split(" ");
+            var commands = commandInput.split(" ");
 
-            switch (commands[0]) {
-                case "player":
-                    System.out.println("JOao cosme");
-                    break;
-                
-                case "user":
-                    System.out.println("User");
-                    break;
-                
-                case "top10":
-                    System.out.println("top10");
-                    break;
-                
-                case "tags":
-                    System.out.println("tags");
-                    break;
-
-                case "q":
-                    programRunning = false;
-                    commandScanner.close();
-                    break;
-            
-                default:
-                    System.out.println("Comando invalido");
-                    break;
-            }
+            assert searchOrchestrator != null;
+            programRunning = searchOrchestrator.search(commands);
         }
-    }    
+        commandScanner.close();
+    }
 }

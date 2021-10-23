@@ -6,33 +6,14 @@ import service.UserHashTable;
 public class DBEntries {
     private JogadorHashTable jogadores;
     private UserHashTable users;
-    private static DBEntries dbEntries = null;
 
-    private DBEntries(){}
-
-    private DBEntries(JogadorHashTable jogadores, UserHashTable users) {
-        dbEntries = new DBEntries();
-        dbEntries.setJogadores(jogadores);
-        dbEntries.setUsers(users);
-    }
-
-    public static DBEntries get_instance(JogadorHashTable jogadorHashTable, UserHashTable userHashTable){
-        if (dbEntries == null){
-            dbEntries = new DBEntries(jogadorHashTable,userHashTable);
-        }
-        return dbEntries;
-    }
-
-    public static void set_instance(JogadorHashTable jogadorHashTable, UserHashTable userHashTable){
-        dbEntries = new DBEntries(jogadorHashTable,userHashTable);
-    }
-
-    public static DBEntries get_instance(){
-        return dbEntries;
+    public DBEntries(JogadorHashTable jogadores, UserHashTable users){
+        this.jogadores = jogadores;
+        this.users = users;
     }
 
     public JogadorHashTable getJogadores() {
-        return dbEntries.jogadores;
+        return this.jogadores;
     }
 
     public void setJogadores(JogadorHashTable jogadores) {
@@ -40,7 +21,7 @@ public class DBEntries {
     }
 
     public UserHashTable getUsers() {
-        return dbEntries.users;
+        return this.users;
     }
 
     public void setUsers(UserHashTable users) {
