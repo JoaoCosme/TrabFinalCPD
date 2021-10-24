@@ -40,7 +40,7 @@
     }
 
     class PesquisaJogadores{
-        - ArvoreTrie nameSearch
+        - ArvoreTrie nomeJogadores
         + constructor(args[])
         + GetPlayersData(String prefixo)
     }

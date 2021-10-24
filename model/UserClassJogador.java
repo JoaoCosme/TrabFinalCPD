@@ -1,6 +1,8 @@
 package model;
 
-public class UserClassJogador {
+import java.util.Comparator;
+
+public class UserClassJogador implements Comparable {
     private int sofifaId;
     private double rating;
 
@@ -31,5 +33,16 @@ public class UserClassJogador {
                 "sofifaId=" + sofifaId +
                 ", rating=" + rating +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(this == o) return 0;
+        UserClassJogador jogador = (UserClassJogador) o;
+        if (jogador.getRating() < this.getRating()){
+            return 1;
+        }else{
+            return -1;
+        }
     }
 }

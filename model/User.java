@@ -1,8 +1,11 @@
 package model;
 
+import service.utils;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import service.utils;
 
 public class User{
     private int id;
@@ -36,7 +39,7 @@ public class User{
 
     public void addJogadoresClassificados(UserClassJogador novoJogadorClassificado){
         this.jogadoresClassificados.add(novoJogadorClassificado);
-        jogadoresClassificados.sort(Comparator.comparing(UserClassJogador::getRating));
+        utils.reverseSort((List<Object>) jogadoresClassificados);
     }
 
     @Override

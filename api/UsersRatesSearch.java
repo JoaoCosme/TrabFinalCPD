@@ -21,11 +21,7 @@ public class UsersRatesSearch {
             return;
         }
         var listaDeAvaliados = user.getJogadoresClassificados();
-
-        var usersShownCounter = new Object() {
-            int usersShown = 0;
-        };
-        listaDeAvaliados.forEach(
+        listaDeAvaliados.stream().limit(20).forEach(
                 jogadorAvaliado -> {
                     var jogador = playerDB.getJogador(jogadorAvaliado.getSofifaId());
                     System.out.println(
@@ -35,12 +31,7 @@ public class UsersRatesSearch {
                             jogador.getCount() + "," +
                             jogadorAvaliado.getRating()
                     );
-                    usersShownCounter.usersShown +=1;
-                    if (usersShownCounter.usersShown >20){
-
-                    }
                 }
         );
-
     }
 }

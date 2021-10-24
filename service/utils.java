@@ -1,12 +1,14 @@
 package service;
 
+import model.UserClassJogador;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+
 // Classe com funcoes auxiliares
-class utils {
+public class utils {
     public static String[] remove_nulls(String[] array_com_nulls) {
         return Arrays.stream(array_com_nulls)
             .filter(new_string -> (new_string != null))
@@ -44,5 +46,9 @@ class utils {
             }
         }
         return arrayDeRetorno;
+    }
+
+    public static void reverseSort(List<Object> objects){
+        Collections.reverse(objects);
     }
 }
