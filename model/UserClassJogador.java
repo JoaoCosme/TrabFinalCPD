@@ -39,10 +39,6 @@ public class UserClassJogador implements Comparable {
     public int compareTo(Object o) {
         if(this == o) return 0;
         UserClassJogador jogador = (UserClassJogador) o;
-        if (jogador.getRating() < this.getRating()){
-            return 1;
-        }else{
-            return -1;
-        }
+        return Double.compare(jogador.getRating(), this.getRating());
     }
 }

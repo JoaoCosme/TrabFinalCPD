@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import static java.util.Collections.*;
+
 // Classe com funcoes auxiliares
 public class utils {
     public static String[] remove_nulls(String[] array_com_nulls) {
         return Arrays.stream(array_com_nulls)
-            .filter(new_string -> (new_string != null))
+            .filter(Objects::nonNull)
             .toArray(String[]::new);
     }
 
@@ -38,17 +40,18 @@ public class utils {
     }
 
     public static String removeSpaces(String stringToFilter) {
-        String arrayDePalavras[] = stringToFilter.split(" ");
-        String arrayDeRetorno = "";
+        String[] arrayDePalavras = stringToFilter.split(" ");
+        StringBuilder arrayDeRetorno = new StringBuilder();
         for (String word : arrayDePalavras) {
             if (word.length()>1) {
-                arrayDeRetorno+=word;
+                arrayDeRetorno.append(word);
             }
         }
-        return arrayDeRetorno;
+        return arrayDeRetorno.toString();
     }
 
-    public static void reverseSort(List<Object> objects){
-        Collections.reverse(objects);
+    public static void reverseSort(List<Comparable> objects){
+        Collections.sort(objects);
+   //     Collections.reverse(objects);
     }
 }

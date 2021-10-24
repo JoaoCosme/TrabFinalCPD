@@ -3,6 +3,8 @@ package api;
 import model.DBEntries;
 import model.User;
 
+import java.util.Collections;
+
 public class UsersRatesSearch {
     private DBEntries dbEntries;
 
@@ -21,6 +23,7 @@ public class UsersRatesSearch {
             return;
         }
         var listaDeAvaliados = user.getJogadoresClassificados();
+        Collections.sort(listaDeAvaliados);
         listaDeAvaliados.stream().limit(20).forEach(
                 jogadorAvaliado -> {
                     var jogador = playerDB.getJogador(jogadorAvaliado.getSofifaId());

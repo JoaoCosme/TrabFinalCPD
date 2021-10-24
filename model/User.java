@@ -30,16 +30,13 @@ public class User{
     }
 
     public List<UserClassJogador> getJogadoresClassificados() {
-        return this.jogadoresClassificados;
-    }
-
-    public void setJogadoresClassificados(List<UserClassJogador> jogadoresClassificados) {
-        this.jogadoresClassificados = jogadoresClassificados;
+        return jogadoresClassificados;
     }
 
     public void addJogadoresClassificados(UserClassJogador novoJogadorClassificado){
         this.jogadoresClassificados.add(novoJogadorClassificado);
-        utils.reverseSort((List<Object>) jogadoresClassificados);
+        //List<Comparable> lista = new ArrayList<>(jogadoresClassificados);
+        //utils.reverseSort(lista);
     }
 
     @Override
