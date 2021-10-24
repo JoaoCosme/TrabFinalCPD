@@ -2,11 +2,13 @@ package api;
 
 import model.DBEntries;
 import model.User;
+import model.UserClassJogador;
+import service.utils;
 
-import java.util.Collections;
+import java.util.*;
 
 public class UsersRatesSearch {
-    private DBEntries dbEntries;
+    private final DBEntries dbEntries;
 
     public UsersRatesSearch(final DBEntries dbEntries){
         this.dbEntries = dbEntries;
@@ -22,8 +24,10 @@ public class UsersRatesSearch {
             System.out.println("Usuario nao encontrado!");
             return;
         }
+
         var listaDeAvaliados = user.getJogadoresClassificados();
-        Collections.sort(listaDeAvaliados);
+        utils.reverseSort(listaDeAvaliados);
+
         listaDeAvaliados.stream().limit(20).forEach(
                 jogadorAvaliado -> {
                     var jogador = playerDB.getJogador(jogadorAvaliado.getSofifaId());

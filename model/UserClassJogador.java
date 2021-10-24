@@ -2,9 +2,10 @@ package model;
 
 import java.util.Comparator;
 
-public class UserClassJogador implements Comparable {
+public class UserClassJogador implements Comparable<UserClassJogador>{
     private int sofifaId;
     private double rating;
+    private Object o;
 
     public UserClassJogador(int sofifaId, double rating) {
         this.sofifaId = sofifaId;
@@ -34,11 +35,10 @@ public class UserClassJogador implements Comparable {
                 ", rating=" + rating +
                 '}';
     }
-
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(UserClassJogador o) {
+        this.o = o;
         if(this == o) return 0;
-        UserClassJogador jogador = (UserClassJogador) o;
-        return Double.compare(jogador.getRating(), this.getRating());
+        return Double.compare(this.getRating(), o.getRating());
     }
 }

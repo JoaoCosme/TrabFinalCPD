@@ -35,8 +35,6 @@ public class User{
 
     public void addJogadoresClassificados(UserClassJogador novoJogadorClassificado){
         this.jogadoresClassificados.add(novoJogadorClassificado);
-        //List<Comparable> lista = new ArrayList<>(jogadoresClassificados);
-        //utils.reverseSort(lista);
     }
 
     @Override

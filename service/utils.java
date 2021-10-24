@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import static java.util.Collections.*;
-
 // Classe com funcoes auxiliares
 public class utils {
     public static String[] remove_nulls(String[] array_com_nulls) {
@@ -50,8 +48,9 @@ public class utils {
         return arrayDeRetorno.toString();
     }
 
-    public static void reverseSort(List<Comparable> objects){
+    public static void reverseSort(List<UserClassJogador> objects){
         Collections.sort(objects);
-   //     Collections.reverse(objects);
+        Collections.reverse(objects);
+        // Talvez criar uma estrutura sofifaID+rating e usar a mesma para ordenar tudo que preciso?
     }
 }
