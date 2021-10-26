@@ -81,14 +81,14 @@ public class SearchOrchestratorAssembler{
         // Testar userHashTable
         System.out.println(userHashTable.getUser(1000));
 
-        System.out.println("carregado");
+        System.out.println("Carregado");
 
         var dbEntries = new DBEntries(jogadoresHashTable,userHashTable);
 
-        var playerNameSearch = new PlayerNameSearch();
-        var tagSearch  = new TagSearch();
-        var topNSearch = new TopNSearch();
-        var userRatesSearch = new UsersRatesSearch(dbEntries);
+        var playerNameSearch = new PlayerNameSearch(dbEntries.get_instance());
+        var tagSearch  = new TagSearch(dbEntries.get_instance());
+        var topNSearch = new TopNSearch(dbEntries.get_instance());
+        var userRatesSearch = new UsersRatesSearch(dbEntries.get_instance());
 
         var returnSearchOrchestrator = new SearchOrchestrator(playerNameSearch,tagSearch,topNSearch,userRatesSearch);
 
