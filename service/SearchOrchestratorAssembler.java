@@ -104,9 +104,11 @@ public class SearchOrchestratorAssembler{
     }
 
     private static List<String> getPosicoes(String[] linhaCsv){
-        List<String> returnList = new ArrayList<String>();
-        for (int i = 2; i < linhaCsv.length; i++) {
+        List<String> returnList = new ArrayList<>();
+        int i = 2;
+        while (i < linhaCsv.length) {
             returnList.add(linhaCsv[i]);
+            i++;
         }
         return  returnList;
     }
