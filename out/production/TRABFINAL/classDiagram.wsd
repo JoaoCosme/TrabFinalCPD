@@ -16,6 +16,20 @@
         - HashTable<User> users
     }
 
+    class HashTable{
+
+    }
+
+    class JogadorHashTable extends HashTable{
+        + add(Jogador)
+        + getJogador(int):Jogador
+    }
+
+    class UserHashTable extends HashTable{
+        + add(User)
+        + getUser(int):User
+    }
+
     class Jogador{
         - int sofifaID
         - String shortName
@@ -41,6 +55,7 @@
 
     class PesquisaJogadores{
         - ArvoreTrie nomeJogadores
+        - DBEtnries bancoDeDados
         + constructor(args[])
         + GetPlayersData(String prefixo)
     }
@@ -50,12 +65,15 @@
     }
 
     class PesquisaAvaliacaoUsers{
+        - DBEtnries bancoDeDados
         + GetUserReviews(int userCode)
     }
     class PesuisaTags{
+        - DBEtnries bancoDeDados
         + GetPlayersWTags(String[] tags)
     }
     class PesquisaTopN{
+        - DBEtnries bancoDeDados
         + GetTop(int topN, String posicao)
     }
     
@@ -68,8 +86,9 @@
     SearchOrchestrator --> PesquisaTopN:has
     SearchOrchestrator --> PesquisaAvaliacaoUsers:has
     PesquisaJogadores --> ArvoreTrie: has
-    DBEtnries --> Jogador
-    DBEtnries --> User
+    DBEtnries --> HashTable
+    JogadorHashTable --> Jogador:Armazena
+    UserHashTable --> User: Armazena
     User --> UserClassJogador
     
 @enduml

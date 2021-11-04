@@ -3,9 +3,13 @@ package api;
 import model.DBEntries;
 
 public class PlayerNameSearch {
-    private final DBEntries dbEntries;
+    private DBEntries dbEntries = null;
 
     public PlayerNameSearch(DBEntries dbEntries) {
         this.dbEntries = dbEntries;
+    }
+
+    public PlayerNameSearch(){
+
     }
 }
