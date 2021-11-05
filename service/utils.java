@@ -56,6 +56,7 @@ public class utils {
         // Talvez criar uma estrutura sofifaID+rating e usar a mesma para ordenar tudo que preciso?
     }
 
+
     public static void sort(List<Jogador> jogadoresOrdenados) {
         jogadoresOrdenados.stream().sorted().collect(Collectors.toList());
     }

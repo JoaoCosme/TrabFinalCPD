@@ -18,7 +18,7 @@ public class SearchOrchestratorAssembler{
         Instant now = Instant.now();
 
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
-        Scanner ratingInfo = utils.create_scanner("dados/minirating.csv");
+        Scanner ratingInfo = utils.create_scanner("dados/rating.csv");
         Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
 
         if (jogadorInfo == null || ratingInfo == null || tagsInfo == null){

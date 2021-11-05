@@ -26,7 +26,12 @@ public class PlayerNameSearch {
     public void searchPlayer(String Name){
         var playerDb = dbEntries.getJogadores();
         var jogadores = (arvoreTrie.keysWithPrefix(Name));
-        var jogadoresOrdenados = jogadores.stream().map(playerDb::getJogador).sorted(Jogador::compareTo);
+        var jogadoresOrdenados = jogadores.stream().map(playerDb::getJogador).collect(Collectors.toList());
+
+        //REMOVER
+        Collections.sort(jogadoresOrdenados);
+        Collections.reverse(jogadoresOrdenados);
+        //REMOVER
 
         jogadoresOrdenados.forEach(jogador -> {
             System.out.println(
