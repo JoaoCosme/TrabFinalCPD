@@ -3,9 +3,13 @@ package api;
 import model.DBEntries;
 
 public class TopNSearch {
-    private final DBEntries dbEntries;
+    private  DBEntries dbEntries;
 
     public TopNSearch(DBEntries dbEntries) {
         this.dbEntries = dbEntries;
+    }
+
+    public  TopNSearch(){
+
     }
 }

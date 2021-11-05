@@ -1,6 +1,7 @@
 package service;
 
 import api.*;
+import com.sun.jdi.Value;
 import model.DBEntries;
 import model.Jogador;
 import model.User;
@@ -25,9 +26,11 @@ public class SearchOrchestratorAssembler{
             return null;
         }
 
-        final int hashSize = 400000;
+        final int hashSize = 20000;
         var jogadoresHashTable = new JogadorHashTable(hashSize/2);
         var userHashTable = new UserHashTable(hashSize);
+        var valueHashTable = new ValueHashTable(hashSize/2);
+        var arvoreTrie = new ArvoreTrie();
         // Talvez tenha que criar hash para rating e count e tag
         // TAG:List<Jogadores>
         // Jogador:GLobalRating
@@ -40,13 +43,14 @@ public class SearchOrchestratorAssembler{
         tagsInfo.nextLine();
 
         while (jogadorInfo.hasNext()){
-            var line = jogadorInfo.nextLine().replaceAll("\"","").split(",");
+            String[] line = jogadorInfo.nextLine().replaceAll("\"","").split(",");
             var listaDePosicoes = getPosicoes(line);
             var sofifaId = Integer.parseInt(line[0]);
             var name = line[1];
             var jogador = new Jogador(sofifaId,name,listaDePosicoes);
 
             jogadoresHashTable.add(jogador);
+            arvoreTrie.put(name,sofifaId);
         }
 
         while (ratingInfo.hasNext()){
@@ -85,9 +89,12 @@ public class SearchOrchestratorAssembler{
 
         var dbEntries = new DBEntries(jogadoresHashTable,userHashTable);
 
-        var playerNameSearch = new PlayerNameSearch(dbEntries.get_instance());
-        var tagSearch  = new TagSearch(dbEntries.get_instance());
-        var topNSearch = new TopNSearch(dbEntries.get_instance());
+        var playerNameSearch = new PlayerNameSearch(dbEntries.get_instance(),arvoreTrie);
+//        var tagSearch  = new TagSearch(dbEntries.get_instance());
+//        var topNSearch = new TopNSearch(dbEntries.get_instance());
+//        var userRatesSearch = new UsersRatesSearch(dbEntries.get_instance());
+        var tagSearch  = new TagSearch();
+        var topNSearch = new TopNSearch();
         var userRatesSearch = new UsersRatesSearch(dbEntries.get_instance());
 
         var returnSearchOrchestrator = new SearchOrchestrator(playerNameSearch,tagSearch,topNSearch,userRatesSearch);
