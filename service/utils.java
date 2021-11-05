@@ -1,11 +1,13 @@
 package service;
 
+import model.Jogador;
 import model.UserClassJogador;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 // Classe com funcoes auxiliares
 public class utils {
@@ -52,5 +54,9 @@ public class utils {
         Collections.sort(objects);
         Collections.reverse(objects);
         // Talvez criar uma estrutura sofifaID+rating e usar a mesma para ordenar tudo que preciso?
+    }
+
+    public static void sort(List<Jogador> jogadoresOrdenados) {
+        jogadoresOrdenados.stream().sorted().collect(Collectors.toList());
     }
 }
