@@ -18,7 +18,7 @@ public class SearchOrchestrator {
 
         switch (commands[0]) {
             case "player":
-                System.out.println("JOao cosme");
+                playerNameSearch.searchPlayer(commands[1]);
                 break;
 
             case "user":

@@ -89,7 +89,7 @@ public class SearchOrchestratorAssembler{
 
         var dbEntries = new DBEntries(jogadoresHashTable,userHashTable);
 
-        var playerNameSearch = new PlayerNameSearch();
+        var playerNameSearch = new PlayerNameSearch(dbEntries.get_instance(),arvoreTrie);
 //        var tagSearch  = new TagSearch(dbEntries.get_instance());
 //        var topNSearch = new TopNSearch(dbEntries.get_instance());
 //        var userRatesSearch = new UsersRatesSearch(dbEntries.get_instance());
