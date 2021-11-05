@@ -1,6 +1,7 @@
 package service;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class ArvoreTrie {
@@ -40,40 +41,40 @@ public class ArvoreTrie {
         return x;
     }
 
-    public Iterable<String> keys()
-    {  return keysWithPrefix("");  }
-    public Iterable<String> keysWithPrefix(String pre)
+//    public Iterable<String> keys()
+//    {  return keysWithPrefix("");  }
+    public List<Integer> keysWithPrefix(String pre)
     {
-        Queue<String> q = new LinkedList<>();
+        List<Integer> q = new LinkedList<>();
         collect(get(root, pre, 0), pre, q);
         return q;
     }
     private void collect(Node x, String pre,
-                         Queue<String> q)
+                         List<Integer> q)
     {
 
         if (x == null) return;
-        if (x.val != 0) q.add(pre);
+        if (x.val != 0) q.add(x.val);
         for (char c = 0; c < R; c++)
             collect(x.next[c], pre + c, q);
     }
 
-    public Iterable<String> keysThatMatch(String pat)
-    {
-        Queue<String> q = new LinkedList<>();
-        collect(root, "", pat, q);
-        return q;
-    }
-    public void collect(Node x, String pre, String pat, Queue<String> q) {
-        int d = pre.length();
-        if (x == null) return;
-        if (d == pat.length() && x.val != 0) q.add(pre);
-        if (d == pat.length()) return;
-        char next = pat.charAt(d);
-        for (char c = 0; c < R; c++)
-            if (next == '.' ||next == c){
-            collect(x.next[c], pre + c, pat, q);
-        }
-    }
+//    public Iterable<String> keysThatMatch(String pat)
+//    {
+//        Queue<String> q = new LinkedList<>();
+//        collect(root, "", pat, q);
+//        return q;
+//    }
+//    public void collect(Node x, String pre, String pat, Queue<String> q) {
+//        int d = pre.length();
+//        if (x == null) return;
+//        if (d == pat.length() && x.val != 0) q.add(pre);
+//        if (d == pat.length()) return;
+//        char next = pat.charAt(d);
+//        for (char c = 0; c < R; c++)
+//            if (next == '.' ||next == c){
+//            collect(x.next[c], pre + c, pat, q);
+//        }
+//    }
 }
 
