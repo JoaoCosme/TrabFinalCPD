@@ -13,11 +13,11 @@ public class ArvoreTrie {
         private Node[] next = new Node[R];
     }
 
-    public Value get(String key)
+    public int get(String key)
     {
         Node x = get(root, key, 0);
-        if (x == null) return null;
-        return (Value) x.val;
+        if (x == null) return -1;
+        return (int) x.val;
     }
 
     private Node get(Node x, String key, int d)
@@ -28,10 +28,10 @@ public class ArvoreTrie {
         return get(x.next[c], key, d+1);
     }
 
-    public void put(String key, Value val)
+    public void put(String key, int val)
     {  root = put(root, key, val, 0);  }
 
-    private Node put(Node x, String key, Value val, int d)
+    private Node put(Node x, String key, int val, int d)
     {  // Change value associated with key if in subtrie rooted at x.
         if (x == null) x = new Node();
         if (d == key.length()) {  x.val = val; return x; }
