@@ -29,7 +29,6 @@ public class SearchOrchestratorAssembler{
         final int hashSize = 20000;
         var jogadoresHashTable = new JogadorHashTable(hashSize/2);
         var userHashTable = new UserHashTable(hashSize);
-        var valueHashTable = new ValueHashTable(hashSize/2);
         var arvoreTrie = new ArvoreTrie();
         // Talvez tenha que criar hash para rating e count e tag
         // TAG:List<Jogadores>
