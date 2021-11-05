@@ -112,7 +112,7 @@ public class Jogador implements Comparable {
     public int compareTo(Object o) {
         if(this == o) return 0;
         Jogador jogador = (Jogador) o;
-        if (jogador.getGlobalRating() < this.globalRating){
+        if (jogador.getGlobalRating() > this.globalRating){
             return 1;
         }else{
             return -1;
