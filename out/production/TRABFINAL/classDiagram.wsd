@@ -57,10 +57,14 @@
         - ArvoreTrie nomeJogadores
         - DBEtnries bancoDeDados
         + constructor(args[])
-        + GetPlayersData(String prefixo)
+        + searchPlayer(String prefixo)
     }
 
     Class ArvoreTrie{
+        - Node root
+        + get(key:Strig): int
+        + put(key:String,val:int)
+        + keysWithPrefix(pre:String):List<Integer>
 
     }
 

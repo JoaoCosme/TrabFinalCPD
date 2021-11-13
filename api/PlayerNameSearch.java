@@ -1,12 +1,9 @@
 package api;
 
 import model.DBEntries;
-import model.Jogador;
 import service.ArvoreTrie;
-import service.utils;
+import service.QuickSorterJogador;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
@@ -28,10 +25,7 @@ public class PlayerNameSearch {
         var jogadores = (arvoreTrie.keysWithPrefix(Name));
         var jogadoresOrdenados = jogadores.stream().map(playerDb::getJogador).collect(Collectors.toList());
 
-        //REMOVER
-        Collections.sort(jogadoresOrdenados);
-        Collections.reverse(jogadoresOrdenados);
-        //REMOVER
+        QuickSorterJogador.sort(jogadoresOrdenados);
 
         jogadoresOrdenados.forEach(jogador -> {
             System.out.println(
