@@ -29,14 +29,24 @@ public class UsersRatesSearch {
         var listaDeAvaliados = user.getJogadoresClassificados();
         QuickSorterUserClassJogador.sort(listaDeAvaliados);
 
+        System.out.printf(
+                "%8s %40s %12s %5s %11s \n",
+                "sofifaID",
+                "ShortName",
+                "GlobalRating",
+                "Count",
+                "UserRating"
+        );
+
         listaDeAvaliados.stream().limit(20).forEach(
                 jogadorAvaliado -> {
                     var jogador = playerDB.getJogador(jogadorAvaliado.getSofifaId());
-                    System.out.println(
-                            jogador.getSofifaId() + "," +
-                            jogador.getShortName() + "," +
-                            jogador.getGlobalRating() + "," +
-                            jogador.getCount() + "," +
+                    System.out.printf(
+                            "%8d %40s %12f %5d %9.2f \n",
+                            jogador.getSofifaId(),
+                            jogador.getShortName(),
+                            jogador.getGlobalRating(),
+                            jogador.getCount(),
                             jogadorAvaliado.getRating()
                     );
                 }
