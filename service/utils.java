@@ -49,4 +49,16 @@ public class utils {
             listaAOrdenar.set(j+1,chave);
         }
     }
+    public static void userClassSort(List<UserClassJogador> listaAOrdenar){
+        for (int i = 0; i < listaAOrdenar.size(); i++) {
+            var chave= listaAOrdenar.get(i);
+            int j = i-1;
+
+            while(j >=0 && listaAOrdenar.get(j).compareTo(chave) > 0){
+                listaAOrdenar.set(j+1,listaAOrdenar.get(j));
+                j--;
+            }
+            listaAOrdenar.set(j+1,chave);
+        }
+    }
 }

@@ -3,6 +3,7 @@ package api;
 import model.DBEntries;
 import model.User;
 import model.UserClassJogador;
+import service.QuickSorterUserClassJogador;
 import service.utils;
 
 import java.util.*;
@@ -26,7 +27,7 @@ public class UsersRatesSearch {
         }
 
         var listaDeAvaliados = user.getJogadoresClassificados();
-        utils.reverseSort(listaDeAvaliados);
+        QuickSorterUserClassJogador.sort(listaDeAvaliados);
 
         listaDeAvaliados.stream().limit(20).forEach(
                 jogadorAvaliado -> {

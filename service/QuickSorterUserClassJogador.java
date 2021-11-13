@@ -1,19 +1,19 @@
 package service;
 
-import model.Jogador;
+import model.UserClassJogador;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuickSorterUserClassJogador {
-    public static void sort(List<Jogador> listaAOrdenar){
+    public static void sort(List<UserClassJogador> listaAOrdenar){
         if(listaAOrdenar.isEmpty()){
             return;
         }
         sort(listaAOrdenar,0,listaAOrdenar.size()-1);
     }
 
-    private static void sort(List<Jogador> listaAOrdenar,
+    private static void sort(List<UserClassJogador> listaAOrdenar,
                       int primeiroIndicie,
                       int ultimoIndice) {
         if (primeiroIndicie < ultimoIndice) {
@@ -24,7 +24,7 @@ public class QuickSorterUserClassJogador {
     }
     private static int particione(int primeiroIndicie,
                            int ultimoIndice,
-                           List<Jogador> listaAOrdenar) {
+                           List<UserClassJogador> listaAOrdenar) {
         var indicePivo = getPivo(primeiroIndicie,ultimoIndice,listaAOrdenar);
         swap(listaAOrdenar,indicePivo,ultimoIndice);
         var pivo = listaAOrdenar.get(ultimoIndice);
@@ -41,8 +41,8 @@ public class QuickSorterUserClassJogador {
         return i+1;
     }
 
-    private static void swap(List<Jogador> listaAOrdenar, int primeiroIndicie, int segundoIndice) {
-        Jogador temp;
+    private static void swap(List<UserClassJogador> listaAOrdenar, int primeiroIndicie, int segundoIndice) {
+        UserClassJogador temp;
         temp = listaAOrdenar.get(segundoIndice);
         listaAOrdenar.set(segundoIndice,listaAOrdenar.get(primeiroIndicie));
         listaAOrdenar.set(primeiroIndicie,temp);
@@ -50,7 +50,7 @@ public class QuickSorterUserClassJogador {
 
     private static int getPivo(int primeiroIndicie,
                                int ultimoIndice,
-                               List<Jogador> listaAOrdenar) {
+                               List<UserClassJogador> listaAOrdenar) {
 
         int indiceMeio    = (ultimoIndice-primeiroIndicie)/2;
 
@@ -58,13 +58,13 @@ public class QuickSorterUserClassJogador {
         var primeiroValor = listaAOrdenar.get(primeiroIndicie);
         var ultimoValor= listaAOrdenar.get(ultimoIndice);
 
-        var listaLocal = new ArrayList<Jogador>();
+        var listaLocal = new ArrayList<UserClassJogador>();
 
         listaLocal.add(primeiroValor);
         listaLocal.add(ultimoValor);
         listaLocal.add(valorMeio);
 
-        utils.jogadorSort(listaLocal);
+        utils.userClassSort(listaLocal);
 
         if (listaLocal.get(1)==primeiroValor) {
             return primeiroIndicie;
