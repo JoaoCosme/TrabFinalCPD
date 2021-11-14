@@ -80,6 +80,14 @@
         - DBEtnries bancoDeDados
         + GetTop(int topN, String posicao)
     }
+
+    class jogadorQuickSort{
+        + sort(List<Jogador>)
+    }
+
+    class UserClassJogadorQuickSort{
+        +sort(List<UserClassJogador>)
+    }
     
     SearchOrchestratorAssembler --> SearchOrchestrator:builds
     WebTFApp --> SearchOrchestratorAssembler:calls
@@ -94,5 +102,7 @@
     JogadorHashTable --> Jogador:Armazena
     UserHashTable --> User: Armazena
     User --> UserClassJogador
+    PesquisaJogadores ..> jogadorQuickSort: usa
+    PesquisaAvaliacaoUsers ..> UserClassJogadorQuickSort:usa
     
 @enduml

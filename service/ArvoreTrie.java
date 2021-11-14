@@ -48,4 +48,3 @@ public class ArvoreTrie {
             collect(x.next[c], pre + c, q);
     }
 }
-

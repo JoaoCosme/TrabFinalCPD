@@ -18,7 +18,7 @@ public class SearchOrchestratorAssembler{
         Instant now = Instant.now();
 
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
-        Scanner ratingInfo = utils.create_scanner("dados/minirating.csv");
+        Scanner ratingInfo = utils.create_scanner("dados/rating.csv");
         Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
 
         if (jogadorInfo == null || ratingInfo == null || tagsInfo == null){
@@ -86,15 +86,15 @@ public class SearchOrchestratorAssembler{
 
         System.out.println("Carregado");
 
-        var dbEntries = new DBEntries(jogadoresHashTable,userHashTable);
+        DBEntries.get_instance(jogadoresHashTable,userHashTable);
 
-        var playerNameSearch = new PlayerNameSearch(dbEntries.get_instance(),arvoreTrie);
+        var playerNameSearch = new PlayerNameSearch(arvoreTrie);
 //        var tagSearch  = new TagSearch(dbEntries.get_instance());
 //        var topNSearch = new TopNSearch(dbEntries.get_instance());
 //        var userRatesSearch = new UsersRatesSearch(dbEntries.get_instance());
         var tagSearch  = new TagSearch();
         var topNSearch = new TopNSearch();
-        var userRatesSearch = new UsersRatesSearch(dbEntries.get_instance());
+        var userRatesSearch = new UsersRatesSearch(DBEntries.get_instance());
 
         var returnSearchOrchestrator = new SearchOrchestrator(playerNameSearch,tagSearch,topNSearch,userRatesSearch);
 

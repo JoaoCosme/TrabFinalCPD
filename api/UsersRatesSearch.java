@@ -8,7 +8,7 @@ public class UsersRatesSearch {
     private final DBEntries dbEntries;
 
     public UsersRatesSearch(final DBEntries dbEntries){
-        this.dbEntries = dbEntries;
+        this.dbEntries = DBEntries.get_instance();
     }
 
     public void searchUser(String userCode){

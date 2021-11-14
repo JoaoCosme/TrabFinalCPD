@@ -1,13 +1,17 @@
 package model;
 
+import com.sun.jdi.PrimitiveValue;
 import service.JogadorHashTable;
 import service.UserHashTable;
+
+import static java.util.Objects.isNull;
 
 public class DBEntries {
     private final JogadorHashTable jogadores;
     private final UserHashTable users;
+    private static DBEntries instanciaUnica;
 
-    public DBEntries(JogadorHashTable jogadores, UserHashTable users){
+    private DBEntries(JogadorHashTable jogadores, UserHashTable users){
         this.jogadores = jogadores;
         this.users = users;
     }
@@ -16,20 +20,18 @@ public class DBEntries {
         return this.jogadores;
     }
 
-//    public void setJogadores(JogadorHashTable jogadores) {
-//        this.jogadores = jogadores;
-//    }
-
     public UserHashTable getUsers() {
         return this.users;
     }
-//
-//    public void setUsers(UserHashTable users) {
-//        this.users = users;
-//    }
 
-    public DBEntries get_instance(){
-        return this;
+    public static void get_instance(JogadorHashTable jogadores, UserHashTable users){
+        if(isNull(instanciaUnica)){
+            instanciaUnica = new DBEntries(jogadores,users);
+        }
+    }
+
+    public static DBEntries get_instance(){
+        return instanciaUnica;
     }
     
 }
