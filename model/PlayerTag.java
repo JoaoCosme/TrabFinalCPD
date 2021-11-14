@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public class PlayerTag {
     private final String tag;
-    private final List<Integer> sofifaIdList = new ArrayList<>();
+    private final List<Integer> playerList = new ArrayList<>();
 
     public PlayerTag(String tag, int sofifaID){
         this.tag = tag;
-        sofifaIdList.add(sofifaID);
+        playerList.add(sofifaID);
     }
 
     public PlayerTag(String tag){
@@ -18,11 +18,11 @@ public class PlayerTag {
     }
     
     public void addSoFifaId(int sofiaId){
-        sofifaIdList.add(sofiaId);
+        playerList.add(sofiaId);
     }
 
     public List<Integer> getSofifaIdList(){
-        return sofifaIdList;
+        return playerList;
     }
 
     public String getTag() {

@@ -4,8 +4,8 @@ import model.PlayerTag;
 import model.ValueSofifaIDDTO;
 
 import java.util.ArrayList;
-public class tagHashTable extends hashTable {
-    public tagHashTable(int hashTableSize){
+public class TagHashTable extends hashTable {
+    public TagHashTable(int hashTableSize){
         super(hashTableSize);
     }
 
