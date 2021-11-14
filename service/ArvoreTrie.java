@@ -13,14 +13,6 @@ public class ArvoreTrie {
         private int val;
         private final Node[] next = new Node[R];
     }
-
-    public int get(String key)
-    {
-        Node x = get(root, key, 0);
-        if (x == null) return -1;
-        return x.val;
-    }
-
     private Node get(Node x, String key, int d)
     {  // Return value associated with key in the subtrie rooted at x.
         if (x == null) return null;
@@ -40,9 +32,6 @@ public class ArvoreTrie {
         x.next[c] = put(x.next[c], key, val, d+1);
         return x;
     }
-
-//    public Iterable<String> keys()
-//    {  return keysWithPrefix("");  }
     public List<Integer> keysWithPrefix(String pre)
     {
         List<Integer> q = new LinkedList<>();
@@ -58,23 +47,5 @@ public class ArvoreTrie {
         for (char c = 0; c < R; c++)
             collect(x.next[c], pre + c, q);
     }
-
-//    public Iterable<String> keysThatMatch(String pat)
-//    {
-//        Queue<String> q = new LinkedList<>();
-//        collect(root, "", pat, q);
-//        return q;
-//    }
-//    public void collect(Node x, String pre, String pat, Queue<String> q) {
-//        int d = pre.length();
-//        if (x == null) return;
-//        if (d == pat.length() && x.val != 0) q.add(pre);
-//        if (d == pat.length()) return;
-//        char next = pat.charAt(d);
-//        for (char c = 0; c < R; c++)
-//            if (next == '.' ||next == c){
-//            collect(x.next[c], pre + c, pat, q);
-//        }
-//    }
 }
 
