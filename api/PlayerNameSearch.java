@@ -27,14 +27,26 @@ public class PlayerNameSearch {
 
         QuickSorterJogador.sort(jogadoresOrdenados);
 
+        System.out.printf(
+                "%8s %40s %20s %12s %5s \n",
+                "sofifaID",
+                "ShortName",
+                "PlayerPositions",
+                "GlobalRating",
+                "Count"
+        );
+
         jogadoresOrdenados.forEach(jogador -> {
-            System.out.println(
-                    jogador.getSofifaId() + "," +
-                    jogador.getShortName() + "," +
-                    jogador.getPlayerPositions().toString() + "," +
-                    jogador.getGlobalRating() + "," +
+            System.out.printf(
+                    "%8d %40s %20s %12f %5d \n",
+                    jogador.getSofifaId(),
+                    jogador.getShortName(),
+                    jogador.getPlayerPositions().toString(),
+                    jogador.getGlobalRating(),
                     jogador.getCount()
             );
         });
+
+
     }
 }

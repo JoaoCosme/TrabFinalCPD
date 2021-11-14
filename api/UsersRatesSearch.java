@@ -2,11 +2,7 @@ package api;
 
 import model.DBEntries;
 import model.User;
-import model.UserClassJogador;
 import service.QuickSorterUserClassJogador;
-import service.utils;
-
-import java.util.*;
 
 public class UsersRatesSearch {
     private final DBEntries dbEntries;
