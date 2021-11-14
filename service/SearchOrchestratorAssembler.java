@@ -28,6 +28,7 @@ public class SearchOrchestratorAssembler{
         var jogadoresHashTable = new JogadorHashTable(hashSize/2);
         var playerTagHashTable = new tagHashTable(hashSize/2);
         var userHashTable = new UserHashTable(hashSize);
+        var positionHashTable = new PositionHashTable(hashSize/10);
         var arvoreTrie = new ArvoreTrie();
 
 
@@ -46,6 +47,18 @@ public class SearchOrchestratorAssembler{
 
 
             //Adicionar logica de PESQUISA POSICAO AQUI
+            listaDePosicoes.forEach(
+                    posicao -> {
+                        var positionPlayerList = positionHashTable.getTag(posicao);
+
+                        if (isNull(positionPlayerList)) {
+                            var newPositionPlayer = new PositionPlayerList(posicao,sofifaId);
+                            positionHashTable.add(newPositionPlayer);
+                        } else {
+                           positionPlayerList.addPlayer(sofifaId);
+                        }
+                    }
+            );
 
             jogadoresHashTable.add(jogador);
             arvoreTrie.put(name,sofifaId);
@@ -90,12 +103,14 @@ public class SearchOrchestratorAssembler{
         }
 
 
+        // ORDENAR LISTA DE POSICOES AQUI//
+
         System.out.println(jogadoresHashTable.getJogador(158023).toString());
         System.out.println(userHashTable.getUser(1000));
 
         System.out.println("Carregado");
 
-        DBEntries.get_instance(jogadoresHashTable,userHashTable,playerTagHashTable);
+        DBEntries.get_instance(jogadoresHashTable,userHashTable,playerTagHashTable,positionHashTable);
 
         var playerNameSearch = new PlayerNameSearch(arvoreTrie);
         var tagSearch  = new TagSearch();

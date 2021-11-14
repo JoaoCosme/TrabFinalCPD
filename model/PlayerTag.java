@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PlayerTag {
-    private String tag;
+    private final String tag;
     private final List<Integer> sofifaIdList = new ArrayList<>();
 
     public PlayerTag(String tag, int sofifaID){

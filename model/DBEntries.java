@@ -1,8 +1,8 @@
 package model;
 
-import com.sun.jdi.PrimitiveValue;
 import service.JogadorHashTable;
 import service.UserHashTable;
+import service.PositionHashTable;
 import service.tagHashTable;
 
 import static java.util.Objects.isNull;
@@ -11,12 +11,17 @@ public class DBEntries {
     private final JogadorHashTable jogadores;
     private final UserHashTable users;
     private final tagHashTable tagHashTable;
+    private final PositionHashTable positionHashTable;
     private static DBEntries instanciaUnica;
 
-    private DBEntries(JogadorHashTable jogadores, UserHashTable users, tagHashTable tagHashTable){
+    private DBEntries(JogadorHashTable jogadores,
+                      UserHashTable users,
+                      tagHashTable tagHashTable,
+                      PositionHashTable positionHashTable){
         this.jogadores = jogadores;
         this.users = users;
         this.tagHashTable = tagHashTable;
+        this.positionHashTable = positionHashTable;
     }
 
     public JogadorHashTable getJogadores() {
@@ -29,9 +34,12 @@ public class DBEntries {
 
     public tagHashTable getTagHashTable(){return this.tagHashTable;}
 
-    public static void get_instance(JogadorHashTable jogadores, UserHashTable users, tagHashTable tagHashTable){
+    public static void get_instance(JogadorHashTable jogadores,
+                                    UserHashTable users,
+                                    tagHashTable tagHashTable,
+                                    PositionHashTable positionHashTable){
         if(isNull(instanciaUnica)){
-            instanciaUnica = new DBEntries(jogadores,users,tagHashTable);
+            instanciaUnica = new DBEntries(jogadores,users,tagHashTable,positionHashTable);
         }
     }
 
