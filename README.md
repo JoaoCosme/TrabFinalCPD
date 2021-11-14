@@ -8,4 +8,4 @@ Trabalho realizado para a disciplina de Classificação e Pesquisa de Dados da U
 
 ## Arquitetura
 
-![Class Diagram](/out/classDiagram/classDiagram.png "Titulo")
+![Class Diagram](/classDiagram/classDiagram.png "Titulo")
