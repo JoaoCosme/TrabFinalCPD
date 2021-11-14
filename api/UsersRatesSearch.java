@@ -7,7 +7,7 @@ import service.QuickSorterUserClassJogador;
 public class UsersRatesSearch {
     private final DBEntries dbEntries;
 
-    public UsersRatesSearch(final DBEntries dbEntries){
+    public UsersRatesSearch(){
         this.dbEntries = DBEntries.get_instance();
     }
 

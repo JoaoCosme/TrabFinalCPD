@@ -4,11 +4,7 @@ import model.DBEntries;
 
 public class TagSearch {
     private DBEntries dbEntries;
-
-    public TagSearch(DBEntries dbEntries) {
-        this.dbEntries = dbEntries;
-    }
     public TagSearch(){
-
+        dbEntries = DBEntries.get_instance();
     }
 }

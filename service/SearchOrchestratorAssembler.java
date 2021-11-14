@@ -1,11 +1,7 @@
 package service;
 
 import api.*;
-import com.sun.jdi.Value;
-import model.DBEntries;
-import model.Jogador;
-import model.User;
-import model.UserClassJogador;
+import model.*;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -13,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.util.Objects.isNull;
+
 public class SearchOrchestratorAssembler{
     public static SearchOrchestrator create() {
         Instant now = Instant.now();
 
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
-        Scanner ratingInfo = utils.create_scanner("dados/rating.csv");
+        Scanner ratingInfo = utils.create_scanner("dados/minirating.csv");
         Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
 
         if (jogadorInfo == null || ratingInfo == null || tagsInfo == null){
@@ -28,12 +26,10 @@ public class SearchOrchestratorAssembler{
 
         final int hashSize = 20000;
         var jogadoresHashTable = new JogadorHashTable(hashSize/2);
+        var playerTagHashTable = new tagHashTable(hashSize/2);
         var userHashTable = new UserHashTable(hashSize);
         var arvoreTrie = new ArvoreTrie();
-        // Talvez tenha que criar hash para rating e count e tag
-        // TAG:List<Jogadores>
-        // Jogador:GLobalRating
-        // Jogador:Count
+
 
         //Passar por headers
         //Talvez ler eles para saber o index de cada coisa? QOL
@@ -47,6 +43,9 @@ public class SearchOrchestratorAssembler{
             var sofifaId = Integer.parseInt(line[0]);
             var name = line[1];
             var jogador = new Jogador(sofifaId,name,listaDePosicoes);
+
+
+            //Adicionar logica de PESQUISA POSICAO AQUI
 
             jogadoresHashTable.add(jogador);
             arvoreTrie.put(name,sofifaId);
@@ -74,27 +73,34 @@ public class SearchOrchestratorAssembler{
 
         while (tagsInfo.hasNext()){
             var tagLine = tagsInfo.nextLine().split(",");
-            var jogador = jogadoresHashTable.getJogador(Integer.parseInt(tagLine[1]));
-            if(tagLine.length>2)
-                jogador.addTag(tagLine[2]);
+            int sofifaID = Integer.parseInt((tagLine[1]));
+
+            if (tagLine.length > 2) {
+                String tag = tagLine[2];
+
+                var playerTag = playerTagHashTable.getTag(tag);
+
+                if (isNull(playerTag)) {
+                    var newTag = new PlayerTag(tag, sofifaID);
+                    playerTagHashTable.add(newTag);
+                } else {
+                    playerTag.addSoFifaId(sofifaID);
+                }
+            }
         }
 
 
         System.out.println(jogadoresHashTable.getJogador(158023).toString());
-        // Testar userHashTable
         System.out.println(userHashTable.getUser(1000));
 
         System.out.println("Carregado");
 
-        DBEntries.get_instance(jogadoresHashTable,userHashTable);
+        DBEntries.get_instance(jogadoresHashTable,userHashTable,playerTagHashTable);
 
         var playerNameSearch = new PlayerNameSearch(arvoreTrie);
-//        var tagSearch  = new TagSearch(dbEntries.get_instance());
-//        var topNSearch = new TopNSearch(dbEntries.get_instance());
-//        var userRatesSearch = new UsersRatesSearch(dbEntries.get_instance());
         var tagSearch  = new TagSearch();
         var topNSearch = new TopNSearch();
-        var userRatesSearch = new UsersRatesSearch(DBEntries.get_instance());
+        var userRatesSearch = new UsersRatesSearch();
 
         var returnSearchOrchestrator = new SearchOrchestrator(playerNameSearch,tagSearch,topNSearch,userRatesSearch);
 
