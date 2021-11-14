@@ -30,6 +30,16 @@
         + getUser(int):User
     }
 
+    class TagHashTable extends HashTable{
+        + add(PlayerTag)
+        + getTag(String):PlayerTag
+    }
+
+    class PositionHashTable extends HashTable{
+        + add(PositionPlayerList)
+        + getPositionPlayerList(String):PositionPlayerList
+    }
+
     class Jogador{
         - int sofifaID
         - String shortName
@@ -47,6 +57,16 @@
     class User{
         - int id
         - List<UserClassJogador> jogadoresClassificados
+    }
+
+    class PlayerTag{
+        - String tag
+        - List<Integer> playerList
+    }
+
+    class PositionPlayerList{
+        - String position
+        - List<Integer> playerList
     }
 
     class SearchOrchestrator{
@@ -92,7 +112,7 @@
     SearchOrchestratorAssembler --> SearchOrchestrator:builds
     WebTFApp --> SearchOrchestratorAssembler:calls
     TFApp --> SearchOrchestratorAssembler:calls
-    SearchOrchestratorAssembler --> DBEtnries: initializes
+    SearchOrchestratorAssembler -> DBEtnries: initializes
     SearchOrchestrator --> PesquisaJogadores:has
     SearchOrchestrator --> PesuisaTags:has
     SearchOrchestrator --> PesquisaTopN:has
@@ -101,6 +121,8 @@
     DBEtnries --> HashTable
     JogadorHashTable --> Jogador:Armazena
     UserHashTable --> User: Armazena
+    TagHashTable --> PlayerTag: Armazena
+    PositionHashTable --> PositionPlayerList: Armazena
     User --> UserClassJogador
     PesquisaJogadores ..> jogadorQuickSort: usa
     PesquisaAvaliacaoUsers ..> UserClassJogadorQuickSort:usa

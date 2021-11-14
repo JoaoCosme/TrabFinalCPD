@@ -3,20 +3,20 @@ package model;
 import service.JogadorHashTable;
 import service.UserHashTable;
 import service.PositionHashTable;
-import service.tagHashTable;
+import service.TagHashTable;
 
 import static java.util.Objects.isNull;
 
 public class DBEntries {
     private final JogadorHashTable jogadores;
     private final UserHashTable users;
-    private final tagHashTable tagHashTable;
+    private final TagHashTable tagHashTable;
     private final PositionHashTable positionHashTable;
     private static DBEntries instanciaUnica;
 
     private DBEntries(JogadorHashTable jogadores,
                       UserHashTable users,
-                      tagHashTable tagHashTable,
+                      TagHashTable tagHashTable,
                       PositionHashTable positionHashTable){
         this.jogadores = jogadores;
         this.users = users;
@@ -32,11 +32,11 @@ public class DBEntries {
         return this.users;
     }
 
-    public tagHashTable getTagHashTable(){return this.tagHashTable;}
+    public TagHashTable getTagHashTable(){return this.tagHashTable;}
 
     public static void get_instance(JogadorHashTable jogadores,
                                     UserHashTable users,
-                                    tagHashTable tagHashTable,
+                                    TagHashTable tagHashTable,
                                     PositionHashTable positionHashTable){
         if(isNull(instanciaUnica)){
             instanciaUnica = new DBEntries(jogadores,users,tagHashTable,positionHashTable);
