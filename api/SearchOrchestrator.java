@@ -1,5 +1,7 @@
 package api;
 
+import java.util.Arrays;
+
 public class SearchOrchestrator {
     private PlayerNameSearch playerNameSearch;
     private TagSearch tagSearch;
@@ -30,7 +32,7 @@ public class SearchOrchestrator {
                 break;
 
             case "tags":
-                System.out.println("tags");
+                tagSearch.search(Arrays.copyOfRange(commands,1,commands.length));
                 break;
 
             case "q":

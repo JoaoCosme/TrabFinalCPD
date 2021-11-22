@@ -16,7 +16,7 @@ public class SearchOrchestratorAssembler{
         Instant now = Instant.now();
 
         Scanner jogadorInfo = utils.create_scanner("dados/players.csv");
-        Scanner ratingInfo = utils.create_scanner("dados/minirating.csv");
+        Scanner ratingInfo = utils.create_scanner("dados/rating.csv");
         Scanner tagsInfo = utils.create_scanner("dados/tags.csv");
 
         if (jogadorInfo == null || ratingInfo == null || tagsInfo == null){
@@ -90,7 +90,7 @@ public class SearchOrchestratorAssembler{
             int sofifaID = Integer.parseInt((tagLine[1]));
 
             if (tagLine.length > 2) {
-                String tag = tagLine[2];
+                String tag = tagLine[2].toUpperCase();
 
                 var playerTag = playerTagHashTable.getTag(tag);
 
@@ -98,16 +98,13 @@ public class SearchOrchestratorAssembler{
                     var newTag = new PlayerTag(tag, sofifaID);
                     playerTagHashTable.add(newTag);
                 } else {
+                    if(playerTag.getSofifaIdList().contains(sofifaID)){
+                        continue;
+                    }
                     playerTag.addSoFifaId(sofifaID);
                 }
             }
         }
-
-
-
-
-        System.out.println(jogadoresHashTable.getJogador(158023).toString());
-        System.out.println(userHashTable.getUser(1000));
 
         System.out.println("Carregado");
 
@@ -134,7 +131,7 @@ public class SearchOrchestratorAssembler{
         System.out.println(
                 "Tempo total ="+Duration.between(now,Instant.now()).toSecondsPart()
         );
-        
+
         return returnSearchOrchestrator;
     }
 
