@@ -29,6 +29,7 @@ public class SearchOrchestratorAssembler{
         var playerTagHashTable = new TagHashTable(hashSize/2);
         var userHashTable = new UserHashTable(hashSize);
         var positionHashTable = new PositionHashTable(hashSize/10);
+        var listaDeTodasPosicoes = new ArrayList<String>();
         var arvoreTrie = new ArvoreTrie();
 
 
@@ -49,6 +50,10 @@ public class SearchOrchestratorAssembler{
             //Adicionar logica de PESQUISA POSICAO AQUI
             listaDePosicoes.forEach(
                     posicao -> {
+                        if(!listaDeTodasPosicoes.contains(posicao)){
+                            listaDeTodasPosicoes.add(posicao);
+                        }
+
                         var positionPlayerList = positionHashTable.getTag(posicao);
 
                         if (isNull(positionPlayerList)) {
@@ -104,6 +109,15 @@ public class SearchOrchestratorAssembler{
 
 
         // ORDENAR LISTA DE POSICOES AQUI//
+
+        listaDeTodasPosicoes.forEach(
+                posicao -> {
+                    var positionPlayerList = positionHashTable.getTag(posicao);
+                    //jogadorPorIdSort(positionPlayerList);
+                    // Criar sorter de jogadores só com UUID aqui
+                }
+        );
+
 
         System.out.println(jogadoresHashTable.getJogador(158023).toString());
         System.out.println(userHashTable.getUser(1000));
