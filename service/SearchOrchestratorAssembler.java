@@ -28,13 +28,10 @@ public class SearchOrchestratorAssembler{
         var jogadoresHashTable = new JogadorHashTable(hashSize/2);
         var playerTagHashTable = new TagHashTable(hashSize/2);
         var userHashTable = new UserHashTable(hashSize);
-        var positionHashTable = new PositionHashTable(hashSize/10);
+        var positionHashTable = new PositionHashTable(30);
         var listaDeTodasPosicoes = new ArrayList<String>();
         var arvoreTrie = new ArvoreTrie();
 
-
-        //Passar por headers
-        //Talvez ler eles para saber o index de cada coisa? QOL
         jogadorInfo.nextLine();
         ratingInfo.nextLine();
         tagsInfo.nextLine();
@@ -47,7 +44,6 @@ public class SearchOrchestratorAssembler{
             var jogador = new Jogador(sofifaId,name,listaDePosicoes);
 
 
-            //Adicionar logica de PESQUISA POSICAO AQUI
             listaDePosicoes.forEach(
                     posicao -> {
                         if(!listaDeTodasPosicoes.contains(posicao)){
@@ -108,15 +104,6 @@ public class SearchOrchestratorAssembler{
         }
 
 
-        // ORDENAR LISTA DE POSICOES AQUI//
-
-        listaDeTodasPosicoes.forEach(
-                posicao -> {
-                    var positionPlayerList = positionHashTable.getTag(posicao);
-                    //jogadorPorIdSort(positionPlayerList);
-                    // Criar sorter de jogadores só com UUID aqui
-                }
-        );
 
 
         System.out.println(jogadoresHashTable.getJogador(158023).toString());
@@ -125,6 +112,13 @@ public class SearchOrchestratorAssembler{
         System.out.println("Carregado");
 
         DBEntries.get_instance(jogadoresHashTable,userHashTable,playerTagHashTable,positionHashTable);
+
+        listaDeTodasPosicoes.forEach(
+                posicao -> {
+                    var positionPlayerList = positionHashTable.getTag(posicao);
+                    QuickSorterId.sort(positionPlayerList.getPlayerList());
+                }
+        );
 
         var playerNameSearch = new PlayerNameSearch(arvoreTrie);
         var tagSearch  = new TagSearch();
@@ -140,7 +134,7 @@ public class SearchOrchestratorAssembler{
         System.out.println(
                 "Tempo total ="+Duration.between(now,Instant.now()).toSecondsPart()
         );
-
+        
         return returnSearchOrchestrator;
     }
 
@@ -148,7 +142,7 @@ public class SearchOrchestratorAssembler{
         List<String> returnList = new ArrayList<>();
         int i = 2;
         while (i < linhaCsv.length) {
-            returnList.add(linhaCsv[i]);
+            returnList.add(linhaCsv[i].replace(" ",""));
             i++;
         }
         return  returnList;

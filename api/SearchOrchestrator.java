@@ -25,8 +25,8 @@ public class SearchOrchestrator {
                 usersRatesSearch.searchUser(commands[1]);
                 break;
 
-            case "top10":
-                System.out.println("top10");
+            case "top":
+                topNSearch.search(Integer.parseInt(commands[1]),commands[2]);
                 break;
 
             case "tags":

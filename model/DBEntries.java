@@ -34,6 +34,8 @@ public class DBEntries {
 
     public TagHashTable getTagHashTable(){return this.tagHashTable;}
 
+    public PositionHashTable getPositionHashTable(){ return this.positionHashTable;}
+
     public static void get_instance(JogadorHashTable jogadores,
                                     UserHashTable users,
                                     TagHashTable tagHashTable,
