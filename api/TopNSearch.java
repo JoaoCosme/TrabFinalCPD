@@ -13,6 +13,7 @@ public class TopNSearch {
     
     public void search(Integer maxJogadores, String posicao) {
         var posCopia = posicao.toUpperCase();
+        posCopia = posCopia.replace("'","");
 
         var listaPosicao = dbEntries.getPositionHashTable().getTag(posCopia);
         if (isNull(listaPosicao)){
