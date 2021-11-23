@@ -40,7 +40,9 @@ public class SearchOrchestrator {
                 break;
 
             default:
-                if (commands[0].substring(0,3).equals("top")){
+                if (commands[0].charAt(0) == 't' &&
+                        commands[0].charAt(1) == 'o' &&
+                        commands[0].charAt(2) == 'p' ){
                     commands[0] = commands[0].replaceAll("\\D+","");
                     topNSearch.search(Integer.parseInt(commands[0]),commands[1]);
                 }else {
