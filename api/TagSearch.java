@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Objects.isNull;
 
 public class TagSearch {
-    private DBEntries dbEntries;
+    private final DBEntries dbEntries;
 
     public TagSearch() {
         dbEntries = DBEntries.get_instance();
@@ -17,8 +17,40 @@ public class TagSearch {
     public void search(String[] tags) {
         var hashTags = dbEntries.getTagHashTable();
         var hashJogadores = dbEntries.getJogadores();
+        var listaIdsConjunto = new ArrayList<Integer>();
+        var primeiraIterecao = true;
 
         var tagsConstruidas = constroiTags(tags);
+
+
+
+        for (String tag : tagsConstruidas) {
+            var listaIds = hashTags.getTag(tag);
+
+            if (isNull(listaIds)){
+                System.out.println("Tag "+tag+" não encontrada!");
+                continue;
+            }
+
+            if(primeiraIterecao){
+                listaIdsConjunto.addAll(listaIds.getSofifaIdList());
+                primeiraIterecao = false;
+            }else{
+                var novaLista = new ArrayList<Integer>();
+
+                for (int id : listaIds.getSofifaIdList()) {
+                    if(listaIdsConjunto.contains(id)){
+                        novaLista.add(id);
+                    }
+                }
+                listaIdsConjunto = novaLista;
+            }
+        }
+
+        if (isNull(listaIdsConjunto)){
+            System.out.println("Nenhum jogador com todas as tags entradas!");
+            return;
+        }
 
         System.out.printf(
                 "%8s %40s %20s %12s %5s \n",
@@ -29,24 +61,15 @@ public class TagSearch {
                 "Count"
         );
 
-        for (String tag : tagsConstruidas) {
-            var listaIds = hashTags.getTag(tag);
-
-            if (isNull(listaIds)){
-                System.out.println("Tag "+tag+" não encontrada!");
-                continue;
-            }
-
-            for (int id : listaIds.getSofifaIdList()) {
-                var jogador = hashJogadores.getJogador(id);
-                System.out.printf(
-                        "%8d %40s %20s %12f %5d \n",
-                        jogador.getSofifaId(),
-                        jogador.getShortName(),
-                        jogador.getPlayerPositions().toString(),
-                        jogador.getGlobalRating(),
-                        jogador.getCount());
-            }
+        for (int id : listaIdsConjunto) {
+            var jogador = hashJogadores.getJogador(id);
+            System.out.printf(
+                    "%8d %40s %20s %12f %5d \n",
+                    jogador.getSofifaId(),
+                    jogador.getShortName(),
+                    jogador.getPlayerPositions().toString(),
+                    jogador.getGlobalRating(),
+                    jogador.getCount());
         }
     }
 

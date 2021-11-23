@@ -44,7 +44,7 @@ public class TopNSearch {
                         jogador.getCount());
                 jogadoresImpressos += 1;
 
-                if (jogadoresImpressos > maxJogadores) {
+                if (jogadoresImpressos >= maxJogadores) {
                     break;
                 }
             }

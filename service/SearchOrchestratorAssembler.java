@@ -129,7 +129,7 @@ public class SearchOrchestratorAssembler{
         tagsInfo.close();
 
         System.out.println(
-                "Tempo total ="+Duration.between(now,Instant.now()).toSecondsPart()
+                "Tempo total = "+Duration.between(now,Instant.now()).toSecondsPart()+ " segundos"
         );
 
         return returnSearchOrchestrator;
