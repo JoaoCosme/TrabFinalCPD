@@ -42,8 +42,7 @@ public class SearchOrchestrator {
             default:
                 if (commands[0].substring(0,3).equals("top")){
                     commands[0] = commands[0].replaceAll("\\D+","");
-                    var N = Integer.parseInt(commands[0]);
-                    topNSearch.search(N,commands[1]);
+                    topNSearch.search(Integer.parseInt(commands[0]),commands[1]);
                 }else {
                     System.out.println("Comando invalido");
                 }

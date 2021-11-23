@@ -5,7 +5,6 @@ import model.Jogador;
 import java.util.*;
 
 public class JogadorHashTable extends hashTable {
-    private ArrayList<Jogador> hashTable[];
 
     public JogadorHashTable(int hashTableSize){
         super(hashTableSize);

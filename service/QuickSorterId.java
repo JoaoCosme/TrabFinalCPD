@@ -30,7 +30,6 @@ public class QuickSorterId {
                                   List<Integer> listaAOrdenar) {
         var indicePivo = getPivo(primeiroIndicie,ultimoIndice,listaAOrdenar);
         swap(listaAOrdenar,indicePivo,ultimoIndice);
-        //var pivo = listaAOrdenar.get(ultimoIndice);
         var pivo = dadosJogadores.getJogador(listaAOrdenar.get(ultimoIndice));
         int i = primeiroIndicie-1;
 

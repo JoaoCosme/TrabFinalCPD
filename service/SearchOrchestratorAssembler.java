@@ -38,9 +38,9 @@ public class SearchOrchestratorAssembler{
 
         while (jogadorInfo.hasNext()){
             String[] line = jogadorInfo.nextLine().replaceAll("\"","").split(",");
-            var listaDePosicoes = getPosicoes(line);
             var sofifaId = Integer.parseInt(line[0]);
             var name = line[1];
+            var listaDePosicoes = getPosicoes(line);
             var jogador = new Jogador(sofifaId,name,listaDePosicoes);
 
 
@@ -106,8 +106,6 @@ public class SearchOrchestratorAssembler{
             }
         }
 
-        System.out.println("Carregado");
-
         DBEntries.get_instance(jogadoresHashTable,userHashTable,playerTagHashTable,positionHashTable);
 
         listaDeTodasPosicoes.forEach(
@@ -127,6 +125,8 @@ public class SearchOrchestratorAssembler{
         jogadorInfo.close();
         ratingInfo.close();
         tagsInfo.close();
+
+        System.out.println("Carregado");
 
         System.out.println(
                 "Tempo total = "+Duration.between(now,Instant.now()).toSecondsPart()+ " segundos"

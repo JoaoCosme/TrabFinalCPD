@@ -22,8 +22,6 @@ public class TagSearch {
 
         var tagsConstruidas = constroiTags(tags);
 
-
-
         for (String tag : tagsConstruidas) {
             var listaIds = hashTags.getTag(tag);
 

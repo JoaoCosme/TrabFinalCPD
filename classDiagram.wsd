@@ -4,9 +4,6 @@
     class TFApp{
         -SearchOrchestrator orchestrator
     }
-    class WebTFApp{
-        -SearchOrchestrator orchestrator
-    }
 
     class SearchOrchestratorAssembler<<Static>>{
         +Create():SearchOrchestrator
@@ -14,6 +11,8 @@
     class DBEtnries<<Singleton>>{
         - HashTable<Jogador> jogadores
         - HashTable<User> users
+        - HashTable<PlayerTag> playerTag
+        - HashTable<PositionPlayerList>
     }
 
     class HashTable{
@@ -46,7 +45,6 @@
         - List<String> playerPositions
         - double globalRating
         - int count
-        - List<String> tags
     }
 
     class UserClassJogador{
@@ -108,11 +106,15 @@
     class UserClassJogadorQuickSort{
         +sort(List<UserClassJogador>)
     }
+
+    class IdQuickSort{
+        +sort(List<Integer>)
+    }
     
     SearchOrchestratorAssembler --> SearchOrchestrator:builds
-    WebTFApp --> SearchOrchestratorAssembler:calls
     TFApp --> SearchOrchestratorAssembler:calls
     SearchOrchestratorAssembler -> DBEtnries: initializes
+    SearchOrchestratorAssembler --> IdQuickSort:usa
     SearchOrchestrator --> PesquisaJogadores:has
     SearchOrchestrator --> PesuisaTags:has
     SearchOrchestrator --> PesquisaTopN:has

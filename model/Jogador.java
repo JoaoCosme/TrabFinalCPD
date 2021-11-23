@@ -1,9 +1,7 @@
 package model;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.List;
-//https://stackify.com/optional-parameters-java/
+
 public class Jogador implements Comparable {
     private int sofifaId;
     private String shortName;
@@ -11,7 +9,6 @@ public class Jogador implements Comparable {
     private double globalRating;
     private double totalGlobalRating;
     private int count;
-    private List<String> tags;
 
     public Jogador(int sofifaId, String shortName, List<String> playerPositions) {
         this.sofifaId = sofifaId;
@@ -19,7 +16,6 @@ public class Jogador implements Comparable {
         this.playerPositions = playerPositions;
         this.globalRating = 0;
         this.count = 0;
-        this.tags = new ArrayList<String>();
     }
 
     public Jogador(int sofifaId){
@@ -34,7 +30,6 @@ public class Jogador implements Comparable {
             ", playerPositions='" + getPlayerPositions() + "'" +
             ", globalRating='" + getGlobalRating() + "'" +
             ", count='" + getCount() + "'" +
-            ", tags='" + getTags() + "'" +
             "}";
     }
 
@@ -58,16 +53,8 @@ public class Jogador implements Comparable {
         return this.playerPositions;
     }
 
-    public void setPlayerPositions(List<String> playerPositions) {
-        this.playerPositions = playerPositions;
-    }
-
     public double getGlobalRating() {
         return this.globalRating;
-    }
-
-    public void setGlobalRating(double globalRating) {
-        this.globalRating = globalRating;
     }
 
     public int getCount() {
@@ -78,24 +65,12 @@ public class Jogador implements Comparable {
         this.count = count;
     }
 
-    public List<String> getTags() {
-        return this.tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
     public void addClassificao(double classificacao){
         this.totalGlobalRating += classificacao;
         this.globalRating = totalGlobalRating/count;
     }
     public void incCount(){
         this.count++;
-    }
-
-    public void addTag(String tag){
-        this.tags.add(tag);
     }
 
     @Override

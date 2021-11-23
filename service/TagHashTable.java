@@ -1,9 +1,7 @@
 package service;
 
 import model.PlayerTag;
-import model.ValueSofifaIDDTO;
 
-import java.util.ArrayList;
 public class TagHashTable extends hashTable {
     public TagHashTable(int hashTableSize){
         super(hashTableSize);
