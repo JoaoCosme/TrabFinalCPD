@@ -40,7 +40,13 @@ public class SearchOrchestrator {
                 break;
 
             default:
-                System.out.println("Comando invalido");
+                if (commands[0].substring(0,3).equals("top")){
+                    commands[0] = commands[0].replaceAll("\\D+","");
+                    var N = Integer.parseInt(commands[0]);
+                    topNSearch.search(N,commands[1]);
+                }else {
+                    System.out.println("Comando invalido");
+                }
                 break;
         }
         return programRunning;
