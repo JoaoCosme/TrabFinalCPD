@@ -35,7 +35,7 @@ public class TopNSearch {
 
         for (Integer id : listaIdJogadores) {
             var jogador = listaJogadores.getJogador(id);
-            if (jogador.getCount() >= 100) {
+            if (jogador.getCount() >= 1000) {
                 System.out.printf(
                         "%8d %40s %20s %12f %5d \n",
                         jogador.getSofifaId(),
