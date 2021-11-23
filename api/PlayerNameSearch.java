@@ -19,8 +19,17 @@ public class PlayerNameSearch {
 
     }
 
-    public void searchPlayer(String Name){
-        var jogadores = (arvoreTrie.keysWithPrefix(Name));
+    public void searchPlayer(String[] Name){
+        var nomePesquisa = "";
+
+        for (int i = 0; i < Name.length; i++) {
+            nomePesquisa = nomePesquisa.concat(Name[i]);
+            if(i!=Name.length-1){
+                nomePesquisa = nomePesquisa.concat(" ");
+            }
+        }
+
+        var jogadores = (arvoreTrie.keysWithPrefix(nomePesquisa));
 
         if (jogadores.isEmpty()){
             System.out.println("Nenhum jogador encontrado!");

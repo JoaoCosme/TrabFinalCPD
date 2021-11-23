@@ -20,7 +20,7 @@ public class SearchOrchestrator {
 
         switch (commands[0]) {
             case "player":
-                playerNameSearch.searchPlayer(commands[1]);
+                playerNameSearch.searchPlayer(Arrays.copyOfRange(commands,1,commands.length));
                 break;
 
             case "user":
